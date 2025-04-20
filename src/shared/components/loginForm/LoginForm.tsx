@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { signIn } from "next-auth/react"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { getErrorText, getUrl } from "@/shared/utils/utils"
+import { getErrorText } from "@/shared/utils/utils"
 import Image from "next/image"
 import { DialogButton } from "../dialogButton/DialogButton"
 import { loginFormSchema, LoginInputs, LoginSchemaProps } from "./schema"
@@ -52,8 +52,6 @@ export const LoginForm = () => {
       await signIn("credentials", {
         email,
         password,
-        redirect: true,
-        callbackUrl: `${getUrl()}/accounts`,
       })
     } catch (error) {
       console.log(error)

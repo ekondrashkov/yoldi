@@ -8,8 +8,8 @@ export async function GET() {
   try {
     const auth = await getServerSession()
     if (!auth || !auth.user?.email) {
-      return new Response(JSON.stringify(null), {
-        status: 200,
+      return new Response(JSON.stringify({ message: "Ошибка авторизации" }), {
+        status: 401,
         headers: { "Content-Type": "application/json" },
       })
     }
@@ -24,10 +24,13 @@ export async function GET() {
     })
 
     if (!user) {
-      return new Response(JSON.stringify({ message: "User not found" }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      })
+      return new Response(
+        JSON.stringify({ message: "Пользователь не найден" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        }
+      )
     }
 
     const images = user.image ?? []
@@ -52,7 +55,7 @@ export async function GET() {
       headers: { "Content-Type": "application/json" },
     })
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Server Error"
+    const message = error instanceof Error ? error.message : "Ошибка серврера"
 
     return new Response(JSON.stringify({ message }), {
       status: 500,
