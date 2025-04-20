@@ -1,8 +1,6 @@
 import prisma from "@/lib/prisma"
 import { User } from "@/types/types"
 
-export const dynamic = "force-dynamic"
-
 export async function GET() {
   try {
     const users =
