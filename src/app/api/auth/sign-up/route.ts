@@ -7,6 +7,8 @@ interface SignupUserRequest {
   password: string
 }
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: Request) {
   try {
     const options = (await request.json()) as SignupUserRequest
