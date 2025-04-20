@@ -2,6 +2,8 @@ import prisma from "@/lib/prisma"
 import { getServerSession } from "next-auth"
 import type { User, UserAvatar } from "@/types/types"
 
+export const dynamic = "force-dynamic"
+
 export async function GET() {
   try {
     const auth = await getServerSession()
