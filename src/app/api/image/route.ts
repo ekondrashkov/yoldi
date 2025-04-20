@@ -1,12 +1,11 @@
 import prisma from "@/lib/prisma"
 import { NextRequest } from "next/server"
-import type { CloudinaryUploadResponse } from "@/types/types"
 import { getServerSession } from "next-auth"
 import { Cover, User } from "@/app/generated/prisma"
+import { getCloudinaryName } from "@/shared/utils/utils"
+import type { CloudinaryUploadResponse } from "@/types/types"
 
-const cloudName = process.env.CLOUDINARY_CLOUD_NAME
-
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic"
 
 export async function POST(req: NextRequest) {
   const auth = await getServerSession()
@@ -38,7 +37,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const imageDataResponse = await fetch(
-      `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+      `https://api.cloudinary.com/v1_1/${getCloudinaryName()}/image/upload`,
       {
         method: "POST",
         body: formData,

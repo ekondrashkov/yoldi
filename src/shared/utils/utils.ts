@@ -16,3 +16,7 @@ export const getUrl = (): string => {
     ? "http://localhost:3000"
     : process.env.NEXT_PUBLIC_VERCEL_URL!
 }
+
+export const getCloudinaryName = (): string => {
+  return process.env.CLOUDINARY_CLOUD_NAME!
+}
