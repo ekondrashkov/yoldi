@@ -8,10 +8,7 @@ export async function GET() {
   try {
     const auth = await getServerSession()
     if (!auth || !auth.user?.email) {
-      return new Response(JSON.stringify({ message: "Unauthorized" }), {
-        status: 401,
-        headers: { "Content-Type": "application/json" },
-      })
+      return null
     }
 
     const user = await prisma.user.findUnique({

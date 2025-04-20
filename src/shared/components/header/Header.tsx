@@ -14,9 +14,9 @@ import styles from "./header.module.scss"
 export const Header = () => {
   const { data: session, status } = useSession()
   const [userData, setUserData] = useState<User | null>(null)
-  const { data } = useSWR<User>(`/api/profile`, fetcher)
+  const { data } = useSWR<User | null>(`/api/profile`, fetcher)
 
-  const getProfile = (): User | undefined => data
+  const getProfile = (): User | null | undefined => data
 
   useEffect(() => {
     if (session && session.user) {
