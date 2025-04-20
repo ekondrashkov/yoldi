@@ -8,7 +8,10 @@ export async function GET() {
   try {
     const auth = await getServerSession()
     if (!auth || !auth.user?.email) {
-      return null
+      return new Response(JSON.stringify(null), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      })
     }
 
     const user = await prisma.user.findUnique({
