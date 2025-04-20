@@ -1,5 +1,6 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
+import { getUrl } from "@/shared/utils/utils"
 
 const handler = NextAuth({
   secret: process.env.AUTH_SECRET,
@@ -17,7 +18,7 @@ const handler = NextAuth({
         const { email, password } = credentials
 
         try {
-          const response = await fetch(`http://localhost:3000/api/auth/login`, {
+          const response = await fetch(`${getUrl()}/api/auth/login`, {
             method: "POST",
             body: JSON.stringify({
               email,
