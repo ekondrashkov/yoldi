@@ -1,0 +1,71 @@
+@import "@/shared/styles/variables.scss";
+
+.about {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding-bottom: 30px;
+
+  .userInfo {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+
+    @media screen and (max-width: $tablet-width) {
+      flex-direction: column;
+      margin-bottom: 30px;
+    }
+
+    .nameAndEmail {
+      display: flex;
+      flex-direction: column;
+      width: 75%;
+
+      @media screen and (max-width: $tablet-width) {
+        width: 100%;
+      }
+
+      .name {
+        margin-bottom: 10px;
+        width: 200px;
+        height: 40px;
+        background-color: $background-secondary;
+        border-radius: 5px;
+      }
+
+      .email {
+        width: 150px;
+        height: 25px;
+        background-color: $background-secondary;
+        margin-bottom: 30px;
+        border-radius: 5px;
+      }
+    }
+  }
+
+  .bio {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 10px;
+    width: 75%;
+
+    .text,
+    .textShort {
+      width: 100%;
+      height: 25px;
+      background-color: $background-secondary;
+      border-radius: 5px;
+    }
+
+    .textShort {
+      width: 75%;
+    }
+
+    @media screen and (max-width: $tablet-width) {
+      width: 100%;
+    }
+  }
+}

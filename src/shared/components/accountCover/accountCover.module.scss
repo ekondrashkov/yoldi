@@ -1,0 +1,26 @@
+@import "@/shared/styles/variables.scss";
+
+.cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  background-color: $background-secondary;
+  border-bottom: 1px solid $stroke-secondary;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+
+  button {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &:hover {
+    button {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}

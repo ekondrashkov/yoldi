@@ -1,0 +1,14 @@
+@import "@/shared/styles/variables.scss";
+
+.background {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  background-color: $background-secondary;
+
+  @media screen and (max-width: $mobile-width) {
+    align-items: flex-start;
+    background-color: $background-primary;
+  }
+}

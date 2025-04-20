@@ -1,0 +1,35 @@
+@import "@/shared/styles/variables.scss";
+
+.lightBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  height: 50px;
+  border: 1px solid $gray;
+  border-radius: 5px;
+
+  font-size: 16px;
+  line-height: 160%;
+  transition: all 0.2s ease-in-out;
+}
+
+.darkBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  height: 50px;
+  border-radius: 5px;
+  background-color: $black;
+
+  font-size: 16px;
+  line-height: 160%;
+  color: $background-primary;
+  transition: all 0.2s ease-in-out;
+
+  &:disabled {
+    background-color: $gray;
+    cursor: default;
+  }
+}

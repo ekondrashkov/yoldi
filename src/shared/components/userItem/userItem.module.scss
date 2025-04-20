@@ -1,0 +1,92 @@
+@import "@/shared/styles/variables.scss";
+
+.item {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: $stroke-secondary;
+  }
+
+  &:last-child {
+    border-bottom: 1px solid $stroke-secondary;
+  }
+
+  .link {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    column-gap: 20px;
+    padding: 10px 0;
+
+    .imageWrapper {
+      width: 50px;
+      min-width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 1px solid $stroke-secondary;
+      overflow: hidden;
+
+      .image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .initials {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      min-width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 1px solid $stroke-secondary;
+      background-color: $background-secondary;
+      font-size: 18px;
+    }
+
+    .nameAndEmail {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+      column-gap: 20px;
+      justify-content: space-between;
+      width: 100%;
+      overflow: hidden;
+
+      @media screen and (max-width: $tablet-width) {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: unset;
+      }
+
+      .name {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 16px;
+        line-height: 160%;
+        font-weight: 500;
+      }
+
+      .email {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 16px;
+        line-height: 160%;
+        color: $gray;
+      }
+    }
+  }
+}

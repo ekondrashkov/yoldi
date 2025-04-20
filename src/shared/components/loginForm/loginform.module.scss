@@ -1,0 +1,73 @@
+@import "@/shared/styles/variables.scss";
+
+.form {
+  display: flex;
+  flex-direction: column;
+
+  width: 400px;
+  padding: 30px;
+  border-radius: 5px;
+  background-color: $background-primary;
+
+  .title {
+    all: unset;
+    display: block;
+    white-space: break-spaces;
+    margin-bottom: 25px;
+
+    font-size: 30px;
+    line-height: 140%;
+    font-weight: 500;
+  }
+
+  .inputs {
+    display: flex;
+    flex-direction: column;
+    padding: 0 5px;
+    margin-bottom: 10px;
+
+    .label {
+      position: relative;
+
+      .input {
+        display: block;
+        width: 100%;
+        font-size: 15px;
+        line-height: 160%;
+        padding: 12px 12px 12px 55px;
+        border: 1px solid $stroke-primary;
+        border-radius: 5px;
+        transition: all 0.2s ease-in-out;
+
+        &:focus {
+          border: 1px solid $black;
+        }
+
+        &::placeholder {
+          color: $gray;
+        }
+      }
+
+      .icon {
+        position: absolute;
+        top: 25px;
+        left: 20px;
+        transform: translateY(-50%);
+      }
+
+      .error {
+        height: 15px;
+        padding: 2px;
+        font-size: 12px;
+        line-height: 100%;
+        color: $error;
+      }
+    }
+  }
+
+  > .error {
+    font-size: 16px;
+    color: $error;
+    margin-bottom: 25px;
+  }
+}

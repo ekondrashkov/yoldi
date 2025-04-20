@@ -1,0 +1,111 @@
+@import "@/shared/styles/variables.scss";
+
+.form {
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (max-width: $mobile-width) {
+    height: 100%;
+  }
+
+  .title {
+    all: unset;
+    display: block;
+    margin-bottom: 25px;
+
+    font-size: 30px;
+    line-height: 140%;
+    font-weight: 500;
+  }
+
+  .labelWrapper {
+    display: flex;
+    flex-direction: column;
+
+    .label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 16px;
+      line-height: 160%;
+      color: $gray;
+    }
+
+    .input,
+    .textArea {
+      width: 100%;
+      margin-bottom: 2px;
+      padding: 12px 20px;
+      border: 1px solid $stroke-primary;
+      border-radius: 5px;
+      font-size: 16px;
+      line-height: 160%;
+      transition: all 0.2s ease-in-out;
+
+      &:focus {
+        border: 1px solid $black;
+        outline: none;
+      }
+    }
+
+    .urlInput {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: nowrap;
+      width: 100%;
+      margin-bottom: 2px;
+
+      .domain {
+        width: fit-content;
+        padding: 12px 15px;
+        border: 1px solid $stroke-primary;
+        border-right: none;
+        border-radius: 5px 0 0 5px;
+        background-color: $background-secondary;
+
+        font-size: 16px;
+        line-height: 160%;
+        color: $gray;
+      }
+
+      > .input {
+        margin-bottom: 0;
+        border-radius: 0 5px 5px 0;
+      }
+    }
+
+    .textArea {
+      height: 154px;
+      resize: none;
+      font-family: inherit;
+
+      @media screen and (max-width: $mobile-width) {
+        min-height: 100px;
+      }
+    }
+
+    .error {
+      font-size: 14px;
+      height: 15px;
+      color: $error;
+    }
+  }
+
+  .labelWrapperTextArea {
+    @media screen and (max-width: $mobile-width) {
+      flex: 1;
+
+      .textArea {
+        height: auto;
+        max-height: 285px;
+        flex: 1;
+      }
+    }
+  }
+
+  .buttonsBar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+  }
+}
