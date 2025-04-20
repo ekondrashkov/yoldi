@@ -6,6 +6,8 @@ import { Cover, User } from "@/app/generated/prisma"
 
 const cloudName = process.env.CLOUDINARY_CLOUD_NAME
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(req: NextRequest) {
   const auth = await getServerSession()
   if (!auth || !auth.user?.email) {
