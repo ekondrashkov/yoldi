@@ -9,3 +9,5 @@ Next.js application with user registration and authentication and store in DB
 - **Fetch data** - SWR
 
 See _.env.example_ to add env variables
+
+**Production:** https://yoldi-sigma.vercel.app/
