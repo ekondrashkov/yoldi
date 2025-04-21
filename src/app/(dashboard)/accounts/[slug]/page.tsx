@@ -1,6 +1,7 @@
 "use client"
 
 import { use, useEffect, useState } from "react"
+import { notFound } from "next/navigation"
 import useSWR from "swr"
 import { fetcher } from "@/lib/swr"
 import { Container } from "@/shared/components/container/Container"
@@ -9,7 +10,7 @@ import { Avatar } from "@/shared/components/avatar/Avatar"
 import { ProfileSceleton } from "@/shared/components/profileSceleton/ProfileSceleton"
 import { AccountCover } from "@/shared/components/accountCover/AccountCover"
 import { getSession, signOut } from "next-auth/react"
-import type { User } from "@/types/types"
+import type { CustomError, User } from "@/types/types"
 import styles from "./page.module.scss"
 
 export default function User({
@@ -18,23 +19,35 @@ export default function User({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = use(params)
-  const { data, error, isLoading } = useSWR<User>(`/api/user/${slug}`, fetcher)
+  const { data, error, isLoading } = useSWR<User | CustomError>(
+    `/api/user/${slug}`,
+    fetcher
+  )
   const [isCurrentUser, SetIsCurrentUser] = useState(false)
   const [userData, setUserData] = useState<User | null>(null)
   const [errorText, setErrorText] = useState<string | null>(null)
 
-  const getUserData = () => data
+  const getUserData = (): User | null => {
+    if (data && "email" in data) {
+      return data
+    }
+    return null
+  }
 
   useEffect(() => {
     if (data) {
-      getSession().then((session) => {
-        SetIsCurrentUser(session?.user?.email === data.email)
-      })
-      const user = getUserData()
-      if (user) setUserData(user)
+      if ("email" in data) {
+        getSession().then((session) => {
+          SetIsCurrentUser(session?.user?.email === data.email)
+        })
+        const user = getUserData()
+        if (user) setUserData(user)
+      } else {
+        if (data.status === 404) notFound()
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data])
+  }, [data, error])
 
   const onSighOut = async () => {
     await signOut({ callbackUrl: "/login" })

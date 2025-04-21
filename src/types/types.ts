@@ -35,3 +35,7 @@ export interface CloudinaryUploadResponse {
   original_filename?: string
   original_extension?: string
 }
+
+export interface CustomError extends Error {
+  status?: number
+}
