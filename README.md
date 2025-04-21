@@ -4,7 +4,7 @@ Next.js application with user registration and authentication and store in DB
 
 - **Auth** - next-auth
 - **DB** - Prisma and Vercel
-- **Image DM** - Cloudinary
+- **Image storage** - Cloudinary
 - **Form validation** - Zod
 - **Fetch data** - SWR
 
