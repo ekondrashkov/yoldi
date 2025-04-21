@@ -18,6 +18,7 @@ export const Header = () => {
 
   const getProfile = (): User | null | undefined => data
 
+  /** Get user data from SWR and update state */
   useEffect(() => {
     if (session && session.user) {
       const user = getProfile()

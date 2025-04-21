@@ -25,11 +25,21 @@
 
   font-size: 16px;
   line-height: 160%;
+  font-weight: 500;
   color: $background-primary;
   transition: all 0.2s ease-in-out;
 
   &:disabled {
-    background-color: $gray;
+    background-color: $stroke-primary;
     cursor: default;
+  }
+
+  &:hover:not(:disabled),
+  &:focus-visible:not(:disabled) {
+    background-color: $black-hover;
+  }
+
+  &:active:not(:disabled) {
+    background-color: $black-active;
   }
 }

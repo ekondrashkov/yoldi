@@ -14,8 +14,11 @@ import styles from "./loginform.module.scss"
 export const LoginForm = () => {
   const [isPending, setPending] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [disabled, setDisabled] = useState(true)
   const params = useSearchParams()
   const errorValue = params.get("error")
+
+  const timeoutId: NodeJS.Timeout | null = null
 
   const {
     register,
@@ -27,13 +30,40 @@ export const LoginForm = () => {
     resolver: zodResolver(loginFormSchema),
   })
 
+  /**
+   * Set initial focus on email input
+   */
   useEffect(() => {
     setFocus(LoginInputs.Email)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  /*
+   * Update submit button state on input with 300ms delay
+   * disabled - if any input is empty
+   */
+  const onInput = () => {
+    if (timeoutId) {
+      clearTimeout(timeoutId)
+    }
+
+    setTimeout(() => {
+      const { email, password } = getValues()
+      setDisabled(!email || !password)
+    }, 300)
+  }
+
+  /**
+   * Handles the login process when the user submits the form.
+   *
+   * - Validates the email and password inputs using the loginFormSchema.
+   * - If validation is successful, attempts to sign in the user with credentials.
+   * - Displays an error message if the sign-in process fails.
+   * - Redirects to the accounts page upon successful login.
+   * - Manages the pending and disabled state to prevent multiple submissions.
+   */
   const onLogin = async () => {
-    if (isPending) return
+    if (isPending || disabled) return
 
     const { email, password } = getValues()
     const validated = loginFormSchema.safeParse({
@@ -82,6 +112,7 @@ export const LoginForm = () => {
             placeholder="E-mail"
             id={LoginInputs.Email}
             disabled={isPending}
+            onInput={onInput}
             {...register(LoginInputs.Email)}
           />
           <p className={styles.error}>{errors?.email?.message ?? ""}</p>
@@ -100,6 +131,7 @@ export const LoginForm = () => {
             placeholder="Пароль"
             id={LoginInputs.Password}
             disabled={isPending}
+            onInput={onInput}
             {...register(LoginInputs.Password)}
           />
           <p className={styles.error}>{errors?.password?.message ?? ""}</p>
@@ -115,7 +147,7 @@ export const LoginForm = () => {
       <DialogButton
         type="submit"
         text="Войти"
-        disabled={isPending}
+        disabled={isPending || disabled}
         colorType="dark"
         onClick={onLogin}
       />

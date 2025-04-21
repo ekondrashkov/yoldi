@@ -4,7 +4,7 @@ import { faker } from "@faker-js/faker"
 const prisma = new PrismaClient()
 
 const userData: Prisma.UserCreateInput[] = Array.from({ length: 10 }, () => ({
-  email: faker.internet.email(),
+  email: faker.internet.email().toLowerCase(),
   name: faker.person.fullName(),
   password: faker.internet.password(),
   description: faker.person.bio(),

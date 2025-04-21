@@ -7,8 +7,6 @@ interface SignupUserRequest {
   password: string
 }
 
-export const dynamic = 'force-dynamic';
-
 export async function POST(request: Request) {
   try {
     const options = (await request.json()) as SignupUserRequest
@@ -19,9 +17,11 @@ export async function POST(request: Request) {
       })
     }
 
+    const email = options.email.toLowerCase()
+
     const existingUser = await prisma.user.findUnique({
       where: {
-        email: options.email,
+        email: email,
       },
     })
 
@@ -40,7 +40,7 @@ export async function POST(request: Request) {
     const user = await prisma.user.create({
       data: {
         name: options.name,
-        email: options.email,
+        email: email,
         password: options.password,
       },
     })

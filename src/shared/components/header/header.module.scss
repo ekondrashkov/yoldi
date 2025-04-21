@@ -57,6 +57,13 @@
 
       font-size: 18px;
       line-height: 140%;
+
+      transition: all 0.2s ease-in-out;
+
+      &:hover,
+      &:focus-visible {
+        border: 1px solid $gray;
+      }
     }
   }
 }

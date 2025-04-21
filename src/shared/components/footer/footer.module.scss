@@ -20,6 +20,17 @@
 
     .link {
       font-weight: 500;
+      color: $black;
+      transition: color 0.2s ease-in-out;
+
+      &:hover,
+      &:focus-visible {
+        color: $black-hover;
+      }
+
+      &:active {
+        color: $black-active;
+      }
     }
   }
 }

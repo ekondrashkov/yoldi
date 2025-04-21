@@ -17,7 +17,10 @@ export const RegistrationForm = () => {
   const [isPending, setPending] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [isPwdShown, setPwdShown] = useState(false)
+  const [disabled, setDisabled] = useState(true)
   const router = useRouter()
+
+  const timeoutId: NodeJS.Timeout | null = null
 
   const {
     register,
@@ -29,13 +32,40 @@ export const RegistrationForm = () => {
     resolver: zodResolver(registrationFormSchema),
   })
 
+  /**
+   * Set initial focus on name input
+   */
   useEffect(() => {
     setFocus(RegistrationInputs.Name)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  /*
+   * Update submit button state on input with 300ms delay
+   * disabled - if any input is empty
+   */
+  const onInput = () => {
+    if (timeoutId) {
+      clearTimeout(timeoutId)
+    }
+
+    setTimeout(() => {
+      const { email, password } = getValues()
+      setDisabled(!email || !password)
+    }, 300)
+  }
+
+  /**
+   * Handles the registration process when the user submits the form.
+   *
+   * - Validates the name, email, and password inputs using the registrationFormSchema.
+   * - If validation is successful, sends a POST request to the sign-up API endpoint.
+   * - On successful registration, redirects the user to the login page.
+   * - Displays an error message if the registration process fails.
+   * - Manages the pending and disabled state to prevent multiple submissions.
+   */
   const onSubmit = async () => {
-    if (isPending) return
+    if (isPending || disabled) return
 
     const { name, email, password } = getValues()
     const validated = registrationFormSchema.safeParse({
@@ -89,6 +119,7 @@ export const RegistrationForm = () => {
             placeholder="Имя"
             id={RegistrationInputs.Name}
             disabled={isPending}
+            onInput={onInput}
             {...register(RegistrationInputs.Name)}
           />
           <p className={styles.error}>{errors?.name?.message ?? ""}</p>
@@ -107,6 +138,7 @@ export const RegistrationForm = () => {
             placeholder="E-mail"
             id={RegistrationInputs.Email}
             disabled={isPending}
+            onInput={onInput}
             {...register(RegistrationInputs.Email)}
           />
           <p className={styles.error}>{errors?.email?.message ?? ""}</p>
@@ -125,6 +157,7 @@ export const RegistrationForm = () => {
             placeholder="Пароль"
             id={RegistrationInputs.Password}
             disabled={isPending}
+            onInput={onInput}
             {...register(RegistrationInputs.Password)}
           />
           <button
@@ -150,7 +183,7 @@ export const RegistrationForm = () => {
       <DialogButton
         type="submit"
         text="Создать аккаунт"
-        disabled={isPending}
+        disabled={isPending || disabled}
         colorType="dark"
         onClick={onSubmit}
       />

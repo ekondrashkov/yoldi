@@ -21,7 +21,7 @@ const handler = NextAuth({
           const response = await fetch(`${getUrl()}/api/auth/login`, {
             method: "POST",
             body: JSON.stringify({
-              email,
+              email: email.toLowerCase(),
               password,
             }),
           })
