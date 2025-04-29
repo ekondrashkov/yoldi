@@ -19,7 +19,7 @@ export async function GET(
 
     if (!user) {
       return new Response(
-        JSON.stringify({ message: "Пользователь не найден", status: 404 }),
+        JSON.stringify({ message: "User not found", status: 404 }),
         {
           status: 404,
           headers: { "Content-Type": "application/json" },
@@ -58,7 +58,8 @@ export async function GET(
       headers: { "Content-Type": "application/json" },
     })
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Ошибка сервера"
+    const message =
+      error instanceof Error ? error.message : "Unexpected server error"
 
     return new Response(JSON.stringify({ message, status: 500 }), {
       status: 500,

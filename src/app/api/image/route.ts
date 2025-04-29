@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic"
 export async function POST(req: NextRequest) {
   const auth = await getServerSession()
   if (!auth || !auth.user?.email) {
-    return new Response(JSON.stringify({ message: "Ошибка авторизации" }), {
+    return new Response(JSON.stringify({ message: "Auth error" }), {
       status: 401,
       headers: { "Content-Type": "application/json" },
     })
@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
   })
 
   if (!user) {
-    return new Response(JSON.stringify({ message: "Пользователь не найден" }), {
+    return new Response(JSON.stringify({ message: "User not found" }), {
       status: 400,
       headers: { "Content-Type": "application/json" },
     })
@@ -45,25 +45,19 @@ export async function POST(req: NextRequest) {
     )
 
     if (!imageDataResponse.ok) {
-      return new Response(
-        JSON.stringify({ message: "Ошибка при загрузке изображения" }),
-        {
-          status: 400,
-          headers: { "Content-Type": "application/json" },
-        }
-      )
+      return new Response(JSON.stringify({ message: "Upload error" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      })
     }
     const imageData =
       (await imageDataResponse.json()) as CloudinaryUploadResponse
 
     if (!imageData.secure_url && !imageData.url) {
-      return new Response(
-        JSON.stringify({ message: "Ошибка при загрузке изображения" }),
-        {
-          status: 400,
-          headers: { "Content-Type": "application/json" },
-        }
-      )
+      return new Response(JSON.stringify({ message: "Upload error" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      })
     }
 
     let image: Cover | User | null = null
@@ -96,13 +90,10 @@ export async function POST(req: NextRequest) {
     }
 
     if (!image) {
-      return new Response(
-        JSON.stringify({ message: "Ошибка при загрузке изображения" }),
-        {
-          status: 400,
-          headers: { "Content-Type": "application/json" },
-        }
-      )
+      return new Response(JSON.stringify({ message: "Upload error" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      })
     }
 
     return new Response(
@@ -119,8 +110,6 @@ export async function POST(req: NextRequest) {
     )
   } catch (error) {
     console.error(error)
-    throw error instanceof Error
-      ? error
-      : new Error("Ошибка при загрузке изображения")
+    throw error instanceof Error ? error : new Error("Upload error")
   }
 }

@@ -90,11 +90,11 @@ export const RegistrationForm = () => {
         router.push("/login")
       } else {
         const { message } = await response.json()
-        setError(message ? (message as string) : "Ошибка регистрации")
+        setError(message ? (message as string) : "Registration error")
       }
     } catch (error) {
       console.error(error)
-      setError(error instanceof Error ? error.message : "Ошибка регистрации")
+      setError(error instanceof Error ? error.message : "Registration error")
     } finally {
       setPending(false)
     }
@@ -102,7 +102,7 @@ export const RegistrationForm = () => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-      <h2 className={styles.title}>{"Регистрация\nв Yoldi Agency"}</h2>
+      <h2 className={styles.title}>{"Sign Up"}</h2>
 
       <div className={styles.inputs}>
         <label className={styles.label} htmlFor={RegistrationInputs.Name}>
@@ -116,7 +116,7 @@ export const RegistrationForm = () => {
           <input
             type="text"
             className={styles.input}
-            placeholder="Имя"
+            placeholder="Fullname"
             id={RegistrationInputs.Name}
             disabled={isPending}
             onInput={onInput}
@@ -135,7 +135,7 @@ export const RegistrationForm = () => {
           <input
             type="email"
             className={styles.input}
-            placeholder="E-mail"
+            placeholder="Email"
             id={RegistrationInputs.Email}
             disabled={isPending}
             onInput={onInput}
@@ -154,7 +154,7 @@ export const RegistrationForm = () => {
           <input
             type={isPwdShown ? "text" : "password"}
             className={styles.pwdInput}
-            placeholder="Пароль"
+            placeholder="Password"
             id={RegistrationInputs.Password}
             disabled={isPending}
             onInput={onInput}
@@ -168,7 +168,7 @@ export const RegistrationForm = () => {
             <Image
               className={styles.eyeIcon}
               src="/eye.svg"
-              alt={isPwdShown ? "Скрыть пароль" : "Показать пароль"}
+              alt={isPwdShown ? "Hide password" : "Show password"}
               width={25}
               height={25}
             />
@@ -182,7 +182,7 @@ export const RegistrationForm = () => {
 
       <DialogButton
         type="submit"
-        text="Создать аккаунт"
+        text="Sign Up"
         disabled={isPending || disabled}
         colorType="dark"
         onClick={onSubmit}

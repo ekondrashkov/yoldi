@@ -76,9 +76,9 @@ export const EditForm = ({ user, onCancel }: EditFormProps) => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-      <h2 className={styles.title}>Редактировать профиль</h2>
+      <h2 className={styles.title}>{"Edit profile"}</h2>
       <label className={styles.labelWrapper} htmlFor={EditInputs.Name}>
-        <span className={styles.label}>{"Имя"}</span>
+        <span className={styles.label}>{"Name"}</span>
         <input
           className={styles.input}
           type="text"
@@ -90,7 +90,7 @@ export const EditForm = ({ user, onCancel }: EditFormProps) => {
         {<p className={styles.error}>{errors?.name?.message ?? ""}</p>}
       </label>
       <label className={styles.labelWrapper} htmlFor={EditInputs.Url}>
-        <span className={styles.label}>{"Адрес профиля"}</span>
+        <span className={styles.label}>{"Profile ID"}</span>
         <div className={styles.urlInput}>
           <div className={styles.domain}>{"example.com/"}</div>
           <input
@@ -108,7 +108,7 @@ export const EditForm = ({ user, onCancel }: EditFormProps) => {
         className={`${styles.labelWrapper} ${styles.labelWrapperTextArea}`}
         htmlFor={EditInputs.Description}
       >
-        <span className={styles.label}>{"Описание"}</span>
+        <span className={styles.label}>{"Description"}</span>
         <textarea
           className={styles.textArea}
           defaultValue={user.description ?? ""}
@@ -123,14 +123,14 @@ export const EditForm = ({ user, onCancel }: EditFormProps) => {
           colorType="light"
           disabled={isPending}
           type="button"
-          text="Отмена"
+          text="Cancel"
           onClick={onCancel}
         />
         <DialogButton
           colorType="dark"
           disabled={isPending}
           type="submit"
-          text="Сохранить"
+          text="Apply"
           onClick={onSubmit}
         />
       </div>

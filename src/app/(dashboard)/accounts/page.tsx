@@ -19,7 +19,7 @@ export default function Accounts() {
   return (
     <Container>
       <div className={styles.accounts}>
-        <h2 className={styles.title}>{"Список аккаунтов"}</h2>
+        <h2 className={styles.title}>{"Accounts"}</h2>
         {isLoading ? (
           <AccountsSceleton />
         ) : error ? (

@@ -8,10 +8,13 @@ export async function GET() {
   try {
     const auth = await getServerSession()
     if (!auth || !auth.user?.email) {
-      return new Response(JSON.stringify({ message: "Ошибка авторизации" }), {
-        status: 401,
-        headers: { "Content-Type": "application/json" },
-      })
+      return new Response(
+        JSON.stringify({ message: "User is not authorized" }),
+        {
+          status: 401,
+          headers: { "Content-Type": "application/json" },
+        }
+      )
     }
 
     const user = await prisma.user.findUnique({
@@ -24,13 +27,10 @@ export async function GET() {
     })
 
     if (!user) {
-      return new Response(
-        JSON.stringify({ message: "Пользователь не найден" }),
-        {
-          status: 400,
-          headers: { "Content-Type": "application/json" },
-        }
-      )
+      return new Response(JSON.stringify({ message: "User not found" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      })
     }
 
     const images = user.image ?? []
@@ -55,7 +55,8 @@ export async function GET() {
       headers: { "Content-Type": "application/json" },
     })
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Ошибка серврера"
+    const message =
+      error instanceof Error ? error.message : "Unexpected server error"
 
     return new Response(JSON.stringify({ message }), {
       status: 500,
@@ -75,7 +76,7 @@ export async function PATCH(request: Request) {
   try {
     const options = (await request.json()) as PatchProfileRequest
     if (!options.id) {
-      return new Response(JSON.stringify({ message: "Неверный id" }), {
+      return new Response(JSON.stringify({ message: "Invalid id" }), {
         status: 400,
         headers: { "Content-Type": "application/json" },
       })
@@ -91,7 +92,7 @@ export async function PATCH(request: Request) {
       if (existingUser) {
         return new Response(
           JSON.stringify({
-            message: `Пользователь с ID ${options.url} уже существует`,
+            message: `User with ID ${options.url} already exists`,
           }),
           {
             status: 400,
@@ -114,7 +115,7 @@ export async function PATCH(request: Request) {
 
     if (!user) {
       return new Response(
-        JSON.stringify({ message: "Ошибка обновления данных" }),
+        JSON.stringify({ message: "Error on updating user" }),
         {
           status: 400,
           headers: { "Content-Type": "application/json" },
@@ -135,7 +136,8 @@ export async function PATCH(request: Request) {
       headers: { "Content-Type": "application/json" },
     })
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Ошибка сервера"
+    const message =
+      error instanceof Error ? error.message : "Unexpected server error"
 
     return new Response(JSON.stringify({ message }), {
       status: 500,

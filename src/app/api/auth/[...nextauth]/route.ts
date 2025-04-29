@@ -34,7 +34,7 @@ const handler = NextAuth({
           return user
         } catch (error) {
           console.error(error)
-          throw error instanceof Error ? error : new Error("Ошибка авторизации")
+          throw error instanceof Error ? error : new Error("Auth error")
         }
       },
     }),

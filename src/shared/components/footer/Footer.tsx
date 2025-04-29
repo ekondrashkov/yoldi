@@ -14,13 +14,15 @@ export const Footer = () => {
       <Container>
         <div className={styles.content}>
           <span className={styles.text}>
-            {isRegisterPage ? "Уже есть аккаунт?" : "Eщё нет аккаунта?"}
+            {isRegisterPage
+              ? "Already have an account?"
+              : "Don't have an account?"}
           </span>
           <Link
             href={isRegisterPage ? "/login" : "/register"}
             className={styles.link}
           >
-            {isRegisterPage ? "Войти" : "Зарегистрироваться"}
+            {isRegisterPage ? "Sign In" : "Sign Up"}
           </Link>
         </div>
       </Container>

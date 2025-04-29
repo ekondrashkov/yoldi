@@ -26,7 +26,8 @@ export async function GET() {
       headers: { "Content-Type": "application/json" },
     })
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Ошибка серврера"
+    const message =
+      error instanceof Error ? error.message : "Unexpected server error"
 
     return new Response(JSON.stringify({ message }), {
       status: 500,

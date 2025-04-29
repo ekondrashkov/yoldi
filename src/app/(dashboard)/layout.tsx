@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Yoldi",
-  description: "Разрабатываем и запускаем сложные веб проекты",
+  title: "Yoldi | Dashboard",
+  description: "Next level digital solutions",
 }
 
 export default function DashboadrLayout({

@@ -4,7 +4,7 @@ import { getInitials } from "@/shared/utils/utils"
 import type { User } from "@/types/types"
 import styles from "./userItem.module.scss"
 
-export const UserItem = (user: User) => {
+export const UserItem = (user: Readonly<User>) => {
   return (
     <li key={user.id} className={styles.item}>
       <Link href={`/accounts/${user.slug}`} className={styles.link}>

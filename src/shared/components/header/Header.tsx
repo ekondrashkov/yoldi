@@ -40,22 +40,20 @@ export const Header = () => {
               <Image
                 className={styles.logoImg}
                 src="/logo.svg"
-                alt="Yoldi logo"
+                alt="Logo"
                 width={64}
                 height={18}
                 priority
               />
             </Link>
-            <h1 className={styles.title}>
-              {`Разрабатываем и запускаем\nсложные веб проекты`}
-            </h1>
+            <h1 className={styles.title}>{`Next level\ndigital solutions`}</h1>
           </div>
           {session && userData ? (
             <Profile user={userData} />
           ) : (
             status === "unauthenticated" && (
               <Link href="/login" className={styles.loginBtn}>
-                {"Войти"}
+                {"Sign In"}
               </Link>
             )
           )}

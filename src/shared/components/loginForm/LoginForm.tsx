@@ -87,7 +87,7 @@ export const LoginForm = () => {
       })
     } catch (error) {
       console.log(error)
-      setError(error instanceof Error ? error.message : "Ошибка авторизации")
+      setError(error instanceof Error ? error.message : "Authorization error")
     } finally {
       setPending(false)
     }
@@ -95,7 +95,7 @@ export const LoginForm = () => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onLogin)}>
-      <h2 className={styles.title}>{"Вход в Yoldi Agency"}</h2>
+      <h2 className={styles.title}>{"Sign In"}</h2>
 
       <div className={styles.inputs}>
         <label className={styles.label} htmlFor={LoginInputs.Email}>
@@ -109,7 +109,7 @@ export const LoginForm = () => {
           <input
             type="text"
             className={styles.input}
-            placeholder="E-mail"
+            placeholder="Email"
             id={LoginInputs.Email}
             disabled={isPending}
             onInput={onInput}
@@ -128,7 +128,7 @@ export const LoginForm = () => {
           <input
             type="password"
             className={styles.input}
-            placeholder="Пароль"
+            placeholder="Password"
             id={LoginInputs.Password}
             disabled={isPending}
             onInput={onInput}
@@ -146,7 +146,7 @@ export const LoginForm = () => {
 
       <DialogButton
         type="submit"
-        text="Войти"
+        text="Sign In"
         disabled={isPending || disabled}
         colorType="dark"
         onClick={onLogin}

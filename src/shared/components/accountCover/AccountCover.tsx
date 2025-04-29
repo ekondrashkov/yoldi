@@ -34,7 +34,7 @@ export const AccountCover = ({
 
       if (!file) return
       if (file.size > MAX_IMAGE_FILE_SIZE) {
-        setError("Размер файла не должен превышать 2 МБ")
+        setError("Image size should not exceed 2 MB")
         return
       }
 
@@ -56,9 +56,7 @@ export const AccountCover = ({
 
         mutate(`/api/user/${user.slug}`)
       } catch (e) {
-        setError(
-          e instanceof Error ? e.message : "Не удалось загрузить изображение"
-        )
+        setError(e instanceof Error ? e.message : "Could not upload image")
       }
     }
     input.click()
@@ -72,7 +70,7 @@ export const AccountCover = ({
     >
       {user && !user?.cover?.url && isCurrentUser && (
         <Button
-          text="Загрузить"
+          text="Upload"
           imageSrc="upload.svg"
           imageSecondSrc="image.svg"
           onClick={onUploadClicked}

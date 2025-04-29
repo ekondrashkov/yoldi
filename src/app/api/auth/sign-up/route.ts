@@ -11,10 +11,13 @@ export async function POST(request: Request) {
   try {
     const options = (await request.json()) as SignupUserRequest
     if (!options.email || !options.password || !options.name) {
-      return new Response(JSON.stringify({ message: "Заполните все поля" }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      })
+      return new Response(
+        JSON.stringify({ message: "Please fill all fields" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        }
+      )
     }
 
     const email = options.email.toLowerCase()
@@ -28,7 +31,7 @@ export async function POST(request: Request) {
     if (existingUser) {
       return new Response(
         JSON.stringify({
-          message: "Пользователь с таким email уже существует",
+          message: "User with this email already exists",
         }),
         {
           status: 400,
@@ -46,13 +49,10 @@ export async function POST(request: Request) {
     })
 
     if (!user) {
-      return new Response(
-        JSON.stringify({ message: "Ошибка при регистрации" }),
-        {
-          status: 400,
-          headers: { "Content-Type": "application/json" },
-        }
-      )
+      return new Response(JSON.stringify({ message: "Sign up failed" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      })
     }
 
     const response: User = {
@@ -67,7 +67,8 @@ export async function POST(request: Request) {
       headers: { "Content-Type": "application/json" },
     })
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Ошибка сервера"
+    const message =
+      error instanceof Error ? error.message : "Unexpected server error"
 
     return new Response(JSON.stringify({ message }), {
       status: 500,

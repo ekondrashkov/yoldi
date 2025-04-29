@@ -84,7 +84,7 @@ export default function User({
                   {isCurrentUser && (
                     <Button
                       link={`/accounts/${userData.slug}/edit`}
-                      text="Редактировать"
+                      text="Edit"
                       imageSrc="edit.svg"
                     />
                   )}
@@ -92,7 +92,11 @@ export default function User({
                 <p className={styles.bio}>{userData.description ?? ""}</p>
               </div>
               {isCurrentUser && (
-                <Button onClick={onSighOut} text="Выйти" imageSrc="exit.svg" />
+                <Button
+                  onClick={onSighOut}
+                  text="Log Out"
+                  imageSrc="exit.svg"
+                />
               )}
             </>
           ) : null}

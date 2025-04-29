@@ -5,7 +5,7 @@ export const getInitials = (name: string): string => {
 export const getErrorText = (error: string): string => {
   switch (error) {
     case "CredentialsSignin":
-      return "Неверный логин или пароль"
+      return "Invalid email or password"
     default:
       return error
   }

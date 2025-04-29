@@ -10,7 +10,7 @@ export async function POST(request: Request) {
   try {
     const options = (await request.json()) as LoginRequest
     if (!options.email) {
-      return new Response(JSON.stringify({ message: "Нет email" }), {
+      return new Response(JSON.stringify({ message: "Please fill email" }), {
         status: 400,
         headers: { "Content-Type": "application/json" },
       })
@@ -26,7 +26,7 @@ export async function POST(request: Request) {
 
     if (!response) {
       return new Response(
-        JSON.stringify({ message: "Пользователь не найден" }),
+        JSON.stringify({ message: "User with this email doesn't exist" }),
         {
           status: 400,
           headers: { "Content-Type": "application/json" },
@@ -35,7 +35,7 @@ export async function POST(request: Request) {
     }
 
     if (response.password !== options.password) {
-      return new Response(JSON.stringify({ message: "Неверный пароль" }), {
+      return new Response(JSON.stringify({ message: "Invalid password" }), {
         status: 400,
         headers: { "Content-Type": "application/json" },
       })
@@ -54,8 +54,7 @@ export async function POST(request: Request) {
       headers: { "Content-Type": "application/json" },
     })
   } catch (error) {
-    const message =
-      error instanceof Error ? error.message : "Ошибка авторизации"
+    const message = error instanceof Error ? error.message : "Sign in error"
 
     return new Response(JSON.stringify({ message }), {
       status: 500,
