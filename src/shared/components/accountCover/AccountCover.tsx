@@ -6,7 +6,7 @@ import { getUrl } from "@/shared/utils/utils"
 import type { User } from "@/types/types"
 import styles from "./accountCover.module.scss"
 
-const MAX_IMAGE_FILE_SIZE = 1024 * 1024 * 2
+const MAX_IMAGE_FILE_SIZE = 1024 * 1024 * 10
 
 interface AccountCoverProps {
   user: User | null
@@ -34,7 +34,7 @@ export const AccountCover = ({
 
       if (!file) return
       if (file.size > MAX_IMAGE_FILE_SIZE) {
-        setError("Image size should not exceed 2 MB")
+        setError("Image size should not exceed 10 MB")
         return
       }
 
