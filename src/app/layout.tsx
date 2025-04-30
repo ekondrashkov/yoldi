@@ -11,7 +11,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Yoldi",
-  description: "Разрабатываем и запускаем сложные веб проекты",
+  description: "Next level digital solutions",
 }
 
 export default function RootLayout({
